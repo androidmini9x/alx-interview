@@ -1,1 +1,1 @@
-# alx-interview
+# Technical interview
