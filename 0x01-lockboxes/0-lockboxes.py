@@ -9,7 +9,6 @@ def canUnlockAll(boxes):
     '''
     Check if all the boxes can be opened
     '''
-    
     # size of boxes
     boxesLen = len(boxes)
 
