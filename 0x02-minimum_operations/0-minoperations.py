@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-'''
-0. Minimum Operations
+'''0. Minimum Operations
+Calculates the fewest number of operations needed
+to result in exactly n
 '''
 
 
