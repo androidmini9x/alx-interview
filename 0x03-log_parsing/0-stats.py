@@ -38,7 +38,7 @@ def stats():
             tokens = parse.groupdict()
             if tokens['code'] in status:
                 status[tokens['code']] += 1
-            size += int(tokens['file_size'])
+                size += int(tokens['file_size'])
             if counter % 10 == 0:
                 print_static(status, size)
         else:
