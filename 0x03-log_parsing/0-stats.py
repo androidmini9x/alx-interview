@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 '''Script reads stdin line by line and computes metrics
-<IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
 '''
 import re
 import sys
@@ -16,6 +15,7 @@ def parse_line(line):
 
 
 def print_static(status, size):
+    '''Print statistic logs'''
     print(f'File size: {size}')
     for k in status:
         if status[k] != 0:
