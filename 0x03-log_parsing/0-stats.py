@@ -9,7 +9,7 @@ def parse_line(line):
     '''Split line to tokens'''
     pattern = r'(?P<ip>^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - ' \
         r'\[(?P<date>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})] ' \
-        r'"(?P<req>.*)" (?P<code>\d{3}) (?P<file_size>\d+)\s*'
+        r'"(?P<req>.*)" (?P<code>\d{3}) (?P<file_size>\d{1,9})$'
     tokens = re.match(pattern, line)
     return tokens
 
@@ -19,7 +19,7 @@ def print_static(status, size):
     print(f'File size: {size}')
     for k in status:
         if status[k] != 0:
-            print('{}: {}'.format(k, status[k]))
+            print('{}: {}'.format(k, status[k]), flush=True)
 
 
 def stats():
