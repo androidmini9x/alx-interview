@@ -1,41 +1,49 @@
 #!/usr/bin/python3
-"""module docs"""
+'''Script reads stdin line by line and computes metrics
+'''
+import re
 import sys
 
 
-def handleTen(statCount, fileSize):
-    print("File size: {}".format(fileSize))
-    for key in sorted(statCount.keys()):
-        if statCount[key] == 0:
-            continue
-        print("{}: {}".format(key, statCount[key]))
+def parse_line(line):
+    '''Split line to tokens'''
+    tokens = line.split(' ')
+    return tokens
 
 
-def log_parsing():
-    """function docs"""
-    c = size = 0
-    counter = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0,
-               "404": 0, "405": 0, "500": 0}
+def print_static(status, size):
+    '''Print statistic logs'''
+    print(f'File size: {size}')
+    for k in sorted(status.keys()):
+        if status[k] != 0:
+            print('{}: {}'.format(k, status[k]), flush=True)
+
+
+def stats():
+    '''Parse stdin line by line'''
+    counter = 0
+    size = 0
+    status = {'200': 0, '301': 0, '400': 0, '401': 0,
+              '403': 0, '404': 0, '405': 0, '500': 0}
 
     try:
         for line in sys.stdin:
-            c += 1
-            split = line.split(" ")
-            try:
-                status = split[-2]
-                size += int(split[-1])
-                if status in counter:
-                    counter[status] += 1
-            except Exception:
-                pass
-            if c % 10 == 0:
-                handleTen(counter, size)
+            counter += 1
+            tokens = parse_line(line)
+            if not tokens[-1].isdigit():
+                file_size = int(tokens[-1])
+            code = tokens[-2]
+            if code in status:
+                status[code] += 1
+                size += file_size
+            if counter % 10 == 0:
+                print_static(status, size)
         else:
-            handleTen(counter, size)
+            print_static(status, size)
+
     except (KeyboardInterrupt, SystemExit):
-        handleTen(counter, size)
-        raise
+        print_static(status, size)
 
 
-if __name__ == "__main__":
-    log_parsing()
+if __name__ == '__main__':
+    stats()
