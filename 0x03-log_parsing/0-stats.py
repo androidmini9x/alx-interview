@@ -17,7 +17,7 @@ def parse_line(line):
 def print_static(status, size):
     '''Print statistic logs'''
     print(f'File size: {size}')
-    for k in status:
+    for k in sorted(status.keys()):
         if status[k] != 0:
             print('{}: {}'.format(k, status[k]), flush=True)
 
@@ -44,7 +44,7 @@ def stats():
         else:
             print_static(status, size)
 
-    except (KeyboardInterrupt, EOFError):
+    except (KeyboardInterrupt, SystemExit):
         print_static(status, size)
 
 
