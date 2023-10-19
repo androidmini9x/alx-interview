@@ -30,8 +30,9 @@ def stats():
         for line in sys.stdin:
             counter += 1
             tokens = parse_line(line)
-            if not tokens[-1].isdigit():
-                file_size = int(tokens[-1])
+            if not tokens[-1].strip().isdigit():
+                continue
+            file_size = int(tokens[-1])
             code = tokens[-2]
             if code in status:
                 status[code] += 1
