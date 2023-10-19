@@ -41,6 +41,8 @@ def stats():
             size += int(tokens['file_size'])
             if counter % 10 == 0:
                 print_static(status, size)
+        else:
+            print_static(status, size)
 
     except (KeyboardInterrupt, SystemExit):
         print_static(status, size)
