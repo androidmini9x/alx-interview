@@ -44,9 +44,8 @@ def stats():
         else:
             print_static(status, size)
 
-    except (KeyboardInterrupt, SystemExit):
+    except (KeyboardInterrupt, EOFError):
         print_static(status, size)
-        raise
 
 
 if __name__ == '__main__':
