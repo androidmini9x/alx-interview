@@ -26,4 +26,6 @@ def validUTF8(data):
             if not (bt & 128 and not (bt & 64)):
                 return False
 
+        n -= 1
+
     return n == 0
