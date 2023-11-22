@@ -8,18 +8,11 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    coins = sorted(coins)
-    counter = 0
-    idx = len(coins) - 1
-
-    while total > 0:
-        if idx == -1:
-            return (-1)
-
-        if (total - coins[idx] >= 0):
-            total -= coins[idx]
-            counter += 1
-        else:
-            idx -= 1
-
-    return counter
+    cache = [total + 1] * (total + 1)
+    cache[0] = 0
+    for i in range(1, total + 1):
+        for c in coins:
+            if i - c >= 0:
+                cache[i] = min(cache[i], 1 + cache[i-c])
+    result = cache[total] if cache[total] != (total+1) else -1
+    return result
