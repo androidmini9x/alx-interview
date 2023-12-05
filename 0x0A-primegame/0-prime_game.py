@@ -3,6 +3,16 @@
 """
 
 
+def isPrime(num):
+    """Return True if num is prime"""
+    if num <= 1:
+        return False
+    for i in range(2, (num//2) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
 def isWinner(x, nums):
     """Determines the winner of a prime game session with `x` rounds.
     """
@@ -27,13 +37,3 @@ def isWinner(x, nums):
         return 'Ben'
     else:
         return 'Maria'
-
-
-def isPrime(num):
-    """Return True if num is prime"""
-    if num <= 1:
-        return False
-    for i in range(2, (num//2) + 1):
-        if num % i == 0:
-            return False
-    return True
