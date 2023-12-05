@@ -14,17 +14,19 @@ def isPrime(num):
 
 
 def isWinner(x, nums):
-    """Determines the winner of a prime game session with `x` rounds.
+    """Return the winner
     """
     if x < 1 or not nums:
         return None
     maria = 0
     ben = 0
+    primes = [i for i in range(max(nums)+1) if isPrime(i)]
+
     for i in range(x):
         idx = 0
         lst = [k for k in range(1, nums[i]+1)]
         for j in lst:
-            if isPrime(j):
+            if j in primes:
                 idx += 1
         if idx % 2 == 0:
             ben += 1
