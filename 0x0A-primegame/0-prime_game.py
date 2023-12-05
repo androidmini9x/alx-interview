@@ -5,6 +5,9 @@
 
 def isWinner(x, nums):
     '''Return winner'''
+    if x < 1 or x != len(nums):
+        return None
+
     player = {'Maria': 0, 'Ben': 0}
     for i in range(x):
         idx = -1
