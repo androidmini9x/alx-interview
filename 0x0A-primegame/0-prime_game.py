@@ -8,7 +8,8 @@ def isWinner(x, nums):
     """
     if x < 1 or not nums:
         return None
-    player = {'Maria': 0, 'Ben': 0}
+    maria = 0
+    ben = 0
     for i in range(x):
         idx = 0
         lst = [k for k in range(1, nums[i]+1)]
@@ -16,13 +17,13 @@ def isWinner(x, nums):
             if isPrime(j):
                 idx += 1
         if idx % 2 == 0:
-            player['Ben'] += 1
+            ben += 1
         else:
-            player['Maria'] += 1
+            maria += 1
 
-    if player['Ben'] == player['Maria']:
+    if ben == maria:
         return None
-    elif player['Ben'] > player['Maria']:
+    elif ben > maria:
         return 'Ben'
     else:
         return 'Maria'
