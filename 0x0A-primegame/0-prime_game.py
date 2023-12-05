@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-''' 0. Prime Game
-'''
+"""Prime game module.
+"""
 
 
 def isWinner(x, nums):
-    '''Return the winner'''
+    """Determines the winner of a prime game session with `x` rounds.
+    """
     if x < 1 or not nums:
         return None
     player = {'Maria': 0, 'Ben': 0}
@@ -28,7 +29,7 @@ def isWinner(x, nums):
 
 
 def isPrime(num):
-    '''Return True if num is prime'''
+    """Return True if num is prime"""
     if num <= 1:
         return False
     for i in range(2, (num//2) + 1):
