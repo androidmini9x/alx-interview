@@ -4,7 +4,7 @@
 
 
 def isWinner(x, nums):
-    ''''''
+    '''Return winner'''
     player = {'Maria': 0, 'Ben': 0}
     for i in range(x):
         idx = -1
