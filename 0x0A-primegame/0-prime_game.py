@@ -1,45 +1,40 @@
 #!/usr/bin/python3
-
-""" Task 0. Prime Game """
-
-
-def is_prime(number):
-    """Checks if a number is prime or not"""
-    if number < 2:
-        return False
-    for i in range(2, int(number**1/2) + 1):
-        if number % i == 0:
-            return False
-    return True
-
-
-def maria_vs_ben(n):
-    """Determines if Maria or Ben wins after a turn"""
-    prime_count = 0
-    for i in range(2, n + 1):
-        if is_prime(i):
-            prime_count += 1
-    return prime_count % 2 == 1
+"""Prime game module.
+"""
 
 
 def isWinner(x, nums):
-    """Returns the name of the player that won the most rounds"""
-
-    if x < 1 or x >= 10000 or not nums:
+    """Return the winner
+    """
+    if x < 1 or not nums:
         return None
+    maria = 0
+    ben = 0
 
-    maria_wins = 0
-    ben_wins = 0
+    def isPrime(num):
+        """Return True if num is prime"""
+        if num <= 1:
+            return False
+        for i in range(2, (num//2) + 1):
+            if num % i == 0:
+                return False
+        return True
 
-    for n in nums:
-        if maria_vs_ben(n):
-            maria_wins += 1
-        else:
-            ben_wins += 1
+    primes = [i for i in range(max(nums)+1) if isPrime(i)]
 
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
+    for i in range(x):
+        idx = 0
+        lst = [k for k in range(1, nums[i]+1)]
+        for j in lst:
+            if j in primes:
+                idx += 1
+
+        ben += idx % 2 == 0
+        maria += idx % 2 == 1
+
+    if ben == maria:
+        return None
+    elif ben > maria:
+        return 'Ben'
     else:
-        return None
+        return 'Maria'
