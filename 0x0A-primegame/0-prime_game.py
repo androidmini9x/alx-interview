@@ -28,10 +28,9 @@ def isWinner(x, nums):
         for j in lst:
             if j in primes:
                 idx += 1
-        if idx % 2 == 0:
-            ben += 1
-        else:
-            maria += 1
+
+        ben += idx % 2 == 0
+        maria += idx % 2 == 1
 
     if ben == maria:
         return None
