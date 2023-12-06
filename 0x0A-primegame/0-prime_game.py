@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-"""Prime game
+"""
+Prime game
 """
 
 
 def isWinner(x, nums):
-    """Return the winner
+    """Determines the winner of a prime game session with `x` rounds.
     """
     if x < 1 or not nums:
         return None
-    maria = 0
-    ben = 0
-    primes = []
-
+    marias_wins, bens_wins = 0, 0
     max_num = max(nums)
+    primes = [0] * (max_num + 1)
+
     for i in range(2, max_num + 1):
         isPrime = True
         for j in range(2, (i//2) + 1):
@@ -20,21 +20,13 @@ def isWinner(x, nums):
                 isPrime = False
                 break
         if isPrime:
-            primes.append(i)
+            primes[i] = 1
 
-    for i in range(x):
-        idx = 0
-        lst = [k for k in range(1, nums[i]+1)]
-        for j in lst:
-            if j in primes:
-                idx += 1
+    for n in nums:
+        primes_count = len(list(filter(lambda x: x == 1, primes[0: n + 1])))
+        bens_wins += primes_count % 2 == 0
+        marias_wins += primes_count % 2 == 1
 
-        ben += idx % 2 == 0
-        maria += idx % 2 == 1
-
-    if ben == maria:
+    if marias_wins == bens_wins:
         return None
-    elif ben > maria:
-        return 'Ben'
-    else:
-        return 'Maria'
+    return 'Maria' if marias_wins > bens_wins else 'Ben'
