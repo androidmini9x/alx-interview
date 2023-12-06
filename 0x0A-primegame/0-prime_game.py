@@ -1,40 +1,66 @@
 #!/usr/bin/python3
-"""Prime game module.
+"""
+This module contains the function `isWinner`
+which determines the winner of the game.
 """
 
 
-def isPrime(num):
-    """Return True if num is prime"""
-    if num <= 1:
+def is_prime(num):
+    """
+    Checks if a number is prime.
+    Returns True if the number is prime, False otherwise.
+    """
+    if num < 2:
         return False
-    for i in range(2, (num//2) + 1):
+    for i in range(2, int(num ** 0.5) + 1):
         if num % i == 0:
             return False
     return True
 
 
 def isWinner(x, nums):
-    """Return the winner
     """
-    if x < 1 or not nums:
-        return None
-    maria = 0
-    ben = 0
-    primes = [i for i in range(max(nums)+1) if isPrime(i)]
+    Determines the winner of the game based on
+    the number of rounds and the values of `nums`.
+
+    Args:
+        x (int): The number of rounds.
+        nums (list): A list of integers representing the
+        values of `n` for each round.
+
+    Returns:
+        str or None: The name of the player with the
+        most wins (either "Maria" or "Ben"),
+        or None if the winner cannot be determined.
+    """
+    maria_wins = 0
+    ben_wins = 0
 
     for i in range(x):
-        idx = 0
-        lst = [k for k in range(1, nums[i]+1)]
-        for j in lst:
-            if j in primes:
-                idx += 1
+        primes = []
+        for j in range(2, nums[i] + 1):
+            if is_prime(j):
+                primes.append(j)
 
-        ben += idx % 2 == 0
-        maria += idx % 2 == 1
+        m_turn = len(primes) % 2 == 0
+        b_turn = not m_turn
 
-    if ben == maria:
-        return None
-    elif ben > maria:
-        return 'Ben'
+        while primes:
+            if m_turn:
+                primes.pop()
+            else:
+                primes.pop(0)
+            m_turn = not m_turn
+            b_turn = not b_turn
+
+        if m_turn:
+            ben_wins += 1
+        else:
+            maria_wins += 1
+
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
+        return "Ben"
     else:
-        return 'Maria'
+        return None
