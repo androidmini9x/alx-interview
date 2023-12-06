@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Prime game module.
+"""Prime game
 """
 
 
@@ -10,17 +10,17 @@ def isWinner(x, nums):
         return None
     maria = 0
     ben = 0
+    primes = []
 
-    def isPrime(num):
-        """Return True if num is prime"""
-        if num <= 1:
-            return False
-        for i in range(2, (num//2) + 1):
-            if num % i == 0:
-                return False
-        return True
-
-    primes = [i for i in range(max(nums)+1) if isPrime(i)]
+    max_num = max(nums)
+    for i in range(2, max_num + 1):
+        isPrime = True
+        for j in range(2, (i//2) + 1):
+            if i % j == 0:
+                isPrime = False
+                break
+        if isPrime:
+            primes.append(i)
 
     for i in range(x):
         idx = 0
